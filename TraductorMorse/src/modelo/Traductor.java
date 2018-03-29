@@ -1,0 +1,297 @@
+package modelo;
+
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+import javax.xml.bind.annotation.adapters.NormalizedStringAdapter;
+
+public class Traductor {
+	
+	public static void main(String args[]) {
+		
+		String morse = "";
+		String resultado = "";
+		Scanner scanner = new Scanner(System.in);
+		String cadena = "";
+
+		
+	
+			System.out.print("Escriba la cadena que desea convertir: ");
+			cadena = scanner.nextLine();			
+			cadena = cadena.toUpperCase();
+			cadena = cadena.trim();
+			if(siEsMorse(cadena)) {
+				System.out.println(cadena);
+				for (int i = 0; i < cadena.length(); i++) {
+					if(cadena.charAt(i)==' ') {
+						if(cadena.charAt(i+1)==' ') {
+							resultado+=conversionMorseANormal(morse)+" ";
+							i = i+2;
+							morse="";
+						}else {
+							resultado+=conversionMorseANormal(morse);
+							morse="";
+						}
+					}else {
+						morse +=cadena.charAt(i);
+					}
+					if(morse!="" && i == cadena.length()-1) {
+						resultado+=conversionMorseANormal(morse);
+					}
+				}
+			}else {
+				for (int i = 0; i < cadena.length(); i++) {
+					if(cadena.charAt(i)==' ') {
+						resultado+="  ";
+					}else {
+						resultado+=conversionNomalAMorse(cadena.charAt(i))+" ";
+					}
+				}
+			}
+			System.out.println("La conversion es: "+resultado);
+			
+	
+	}
+	///////////////////////////Saber si es morse///////////////////////////////////////////////////
+	public static boolean siEsMorse(String cadena) {
+		if (cadena.contains("A") || cadena.contains("E") || cadena.contains("I") || cadena.contains("O") || cadena.contains("U")) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	/////////////////////////Conversion morse a normal////////////////////////////////////////////////////////
+	
+	
+	public static String conversionMorseANormal(String morse) {
+		String salida = "";
+		switch (morse) {
+		case ".-":
+			salida = "A" ;
+			break;
+		case "-...":
+			salida = "B";
+			break;
+		case "-.-.":
+			salida = "C" ;
+			break;
+		case "-..":
+			salida = "D";
+			break;
+		case ".":
+			salida = "E" ;
+			break;
+		case "..-.":
+			salida = "F";
+			break;
+		case "--.":
+			salida = "G";
+			break;
+		case "....":
+			salida = "H";
+			break;
+		case "..":
+			salida = "I";
+			break;
+		case ".---":
+			salida = "J";
+			break;
+		case "-.-":
+			salida = "K";
+			break;
+		case ".-..":
+			salida = "L";
+			break;
+		case "--":
+			salida = "M";
+			break;
+		case "-.":
+			salida = "N";
+			break;
+		case "---":
+			salida = "O";
+			break;
+		case ".--.":
+			salida = "P";
+			break;
+		case "--.-":
+			salida = "Q";
+			break;
+		case ".-.":
+			salida = "R";
+			break;
+		case "...":
+			salida = "S";
+			break;
+		case "-":
+			salida = "T";
+			break;
+		case "..-":
+			salida = "U";
+			break;
+		case "...-":
+			salida = "V";
+			break;
+		case ".--":
+			salida = "W";
+			break;
+		case "-..-":
+			salida = "X";
+			break;
+		case "-.--":
+			salida = "Y";
+			break;
+		case "--..":
+			salida = "Z";
+			break;
+		case ".----":
+			salida = "1";
+			break;
+		case "..---":
+			salida = "2";
+			break;
+		case "...--":
+			salida = "3";
+			break;
+		case "....-":
+			salida = "4";
+			break;
+		case ".....":
+			salida = "5";
+			break;
+		case "-....":
+			salida = "6";
+			break;
+		case "--...":
+			salida = "7";
+			break;
+		case "---..":
+			salida = "8";
+			break;
+		case "----.":
+			salida = "9";
+			break;
+		case "-----":
+			salida = "0";
+			break;
+		}
+		return salida;
+	}
+	
+	////////////Conversion normal a morse////////
+	public static String conversionNomalAMorse(char caracter) {
+		String salida = "";
+		switch (caracter) {
+		case 'A':
+			salida = ".-";
+			break;
+		case 'B':
+			salida = "-...";
+			break;
+		case 'C':
+			salida = "-.-.";
+			break;
+		case 'D':
+			salida = "-..";
+			break;
+		case 'E':
+			salida = ".";
+			break;
+		case 'F':
+			salida = "..-.";
+			break;
+		case 'G':
+			salida = "--.";
+			break;
+		case 'H':
+			salida = "....";
+			break;
+		case 'I':
+			salida = "..";
+			break;
+		case 'J':
+			salida = ".---";
+			break;
+		case 'K':
+			salida = "-.-";
+			break;
+		case 'L':
+			salida = ".-..";
+			break;
+		case 'M':
+			salida = "--";
+			break;
+		case 'N':
+			salida = "-.";
+			break;
+		case 'O':
+			salida = "---";
+			break;
+		case 'P':
+			salida = ".--.";
+			break;
+		case 'Q':
+			salida = "--.-";
+			break;
+		case 'R':
+			salida = ".-.";
+			break;
+		case 'S':
+			salida = "...";
+			break;
+		case 'T':
+			salida = "-";
+			break;
+		case 'U':
+			salida = "..-";
+			break;
+		case 'V':
+			salida = "...-";
+			break;
+		case 'W':
+			salida = ".--";
+			break;
+		case 'X':
+			salida = "-..-";
+			break;
+		case 'Y':
+			salida = "-.--";
+			break;
+		case 'Z':
+			salida = "--..";
+			break;
+		case '1':
+			salida = ".----";
+			break;
+		case '2':
+			salida = "..---";
+			break;
+		case '3':
+			salida = "...--";
+			break;
+		case '4':
+			salida = "....-";
+			break;
+		case '5':
+			salida = ".....";
+			break;
+		case '6':
+			salida = "-....";
+			break;
+		case '7':
+			salida = "--...";
+			break;
+		case '8':
+			salida = "---..";
+			break;
+		case '9':
+			salida = "----.";
+			break;
+		case '0':
+			salida = "-----";
+			break;
+		}
+		return salida;
+	}
+
+}
